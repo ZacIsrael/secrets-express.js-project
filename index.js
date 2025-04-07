@@ -37,19 +37,6 @@ app.use(
   })
 );
 
-// custom logger that is an anonymous function
-// let logger = (req, res, next) => {
-//   // req.method = the method (GET, POST, PUT, etc.) of the request
-//   console.log("Request Method = ", req.method);
-//   // req.body = the request's body
-//   console.log("Request Body = ", req.body);
-//   // req.url = the end point of this request
-//   console.log("Request URL: ", req.url);
-//   // moves on to the next middleware function in the chain; prevents the app from hanging
-//   next();
-// };
-
-// app.use(logger);
 
 // default endpoint
 app.get("/", (req, res) => {
@@ -57,10 +44,12 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
+// post request
 app.post("/check", (req, res) => {
   let reqPassword = req.body.password;
   console.log("req.body = ", req.body);
 
+  // only display the secret HTML if the user input is the same as the secretPassword
   if (reqPassword === secretPassword) {
     res.sendFile(__dirname + "/public/secret.html");
     // res.sendStatus(200);
